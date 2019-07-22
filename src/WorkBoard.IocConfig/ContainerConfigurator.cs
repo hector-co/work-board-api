@@ -32,6 +32,8 @@ namespace WorkBoard.IocConfig
             var dbContext = container.Resolve<WorkBoardContext>();
             dbContext.Database.Migrate();
 
+            DbInitializer.AddSampleData(dbContext);
+
             return container;
         }
 

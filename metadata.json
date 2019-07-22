@@ -1,6 +1,6 @@
 {
   "namespace": "WorkBoard",
-  "dataBaseSchema": "WorkBoard",
+  "dataBaseSchema": "dbo",
   "backendFolder": ".",
   "tsFilesFolder": "../webapp",
   "queriesNamespace": "Application.Queries",

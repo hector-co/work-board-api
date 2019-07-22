@@ -9,7 +9,7 @@ namespace WorkBoard.DataAccess.Ef
 {
 	public class WorkBoardContext : DbContext
 	{
-		public const string WorkBoardSchema = "workBoard";
+		public const string WorkBoardSchema = "dbo";
 
 		public WorkBoardContext(DbContextOptions options) : base(options)
 		{
