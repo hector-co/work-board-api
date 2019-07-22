@@ -9,8 +9,47 @@
   "dtosFolder": "Application.Dtos",
   "apiPrefix": "api",
   "classes": {
+    "User": {
+      "properties": {
+        "Id": "int",
+        "Name": "string",
+        "LastName": "string",
+        "Username": "string",
+        "Password": "string",
+        "Email": "string",
+        "Veryfied": "bool"
+      },
+      "identifier": "Id"
+    },
+    "Board": {
+      "properties": {
+        "Id": "int",
+        "Title": "string",
+        "Users": {
+          "type": "List<User>",
+          "withMany": true
+        },
+        "Description": "string",
+        "State": "BoardState"
+      },
+      "identifier": "Id"
+    },
+    "BoardColumn": {
+      "properties": {
+        "Id": "int",
+        "Board": "Board",
+        "Title": "string",
+        "Order": "int",
+        "Description": "string",
+        "Active": "bool"
+      },
+      "identifier": "Id"
+    }
   },
   "enums": {
+    "BoardState": {
+      "values": [ "Open", "Closed", "ReOpen" ]
+    }
   },
   "skip": [],
   "skipByType": {
