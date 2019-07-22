@@ -1,0 +1,25 @@
+{
+  "namespace": "WorkBoard",
+  "dataBaseSchema": "WorkBoard",
+  "backendFolder": ".",
+  "tsFilesFolder": "../webapp",
+  "queriesNamespace": "Application.Queries",
+  "queriesFolder": "Application.Queries",
+  "dtosNamespace": "Application.Dtos",
+  "dtosFolder": "Application.Dtos",
+  "apiPrefix": "api",
+  "classes": {
+  },
+  "enums": {
+  },
+  "skip": [],
+  "skipByType": {
+    "Domain": [],
+    "Dtos": [],
+    "Queries": [],
+    "Commands": [],
+    "DataAccessEf": [],
+    "Api": [],
+    "Ts": []
+  }
+}
