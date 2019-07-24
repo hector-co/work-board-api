@@ -4,26 +4,22 @@ using Hco.Base.DataAccess;
 using WorkBoard.Domain.Model;
 using WorkBoard.Application.Dtos;
 
-namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Repository
+namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Repository
 {
     public class BoardColumnDataAccessMapper
     {
 		static BoardColumnDataAccessMapper()
         {
-            TypeAdapterConfig<BoardColumn, BoardColumnDtoDataAccess>.NewConfig()
+            TypeAdapterConfig<BoardColumn, BoardColumnDto>.NewConfig()
                 .Map(dst => dst.Id, src => src.Id)
-                .Map(dst => dst.Version, src => src.AggregateVersion)
-                .Map(dst => dst.Guid, src => src.AggregateGuid)
                 .Map(dst => dst.Title, "_title")
                 .Map(dst => dst.Order, "_order")
                 .Map(dst => dst.Description, "_description")
                 .Map(dst => dst.Active, "_active")
                 .IgnoreNonMapped(true);
 
-			TypeAdapterConfig<BoardColumnDtoDataAccess, BoardColumn>.NewConfig()
+			TypeAdapterConfig<BoardColumnDto, BoardColumn>.NewConfig()
                 .Map(dst => dst.Id, src => src.Id)
-                .Map(dst => dst.AggregateVersion, src => src.Version)
-                .Map(dst => dst.AggregateGuid, src => src.Guid)
                 .Map("_title", dst => dst.Title)
                 .Map("_order", dst => dst.Order)
                 .Map("_description", dst => dst.Description)
@@ -32,29 +28,29 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Repository
                 .ConstructUsing(dst => MapperHelper.CreateInstanceWithDefaultConstructor<BoardColumn>());
         }
 
-		public static BoardColumnDtoDataAccess Map(WorkBoardContext context, BoardColumn boardColumn)
+		public static BoardColumnDto Map(WorkBoardContext context, BoardColumn boardColumn)
 		{
-			var boardColumnDto = new BoardColumnDtoDataAccess();
+			var boardColumnDto = new BoardColumnDto();
 			Map(context, boardColumn, ref boardColumnDto);
 			return boardColumnDto;
 		}
 
-		public static void Map(WorkBoardContext context, BoardColumn boardColumn, ref BoardColumnDtoDataAccess boardColumnDtoDataAccess)
+		public static void Map(WorkBoardContext context, BoardColumn boardColumn, ref BoardColumnDto boardColumnDto)
         {
-            boardColumnDtoDataAccess = boardColumn.Adapt(boardColumnDtoDataAccess);
+            boardColumnDto = boardColumn.Adapt(boardColumnDto);
 			// TODO map missing properties
         }
 
-		public static BoardColumn Map(WorkBoardContext context, BoardColumnDtoDataAccess boardColumnDtoDataAccess)
+		public static BoardColumn Map(WorkBoardContext context, BoardColumnDto boardColumnDto)
 		{
 			var boardColumn = MapperHelper.CreateInstanceWithDefaultConstructor<BoardColumn>();
-			Map(context, boardColumnDtoDataAccess, ref boardColumn);
+			Map(context, boardColumnDto, ref boardColumn);
 			return boardColumn;
 		}
 
-		public static void Map(WorkBoardContext context, BoardColumnDtoDataAccess boardColumnDtoDataAccess, ref BoardColumn boardColumn)
+		public static void Map(WorkBoardContext context, BoardColumnDto boardColumnDto, ref BoardColumn boardColumn)
         {
-            boardColumn = boardColumnDtoDataAccess.Adapt(boardColumn);
+            boardColumn = boardColumnDto.Adapt(boardColumn);
 			// TODO map missing properties
         }
 	}

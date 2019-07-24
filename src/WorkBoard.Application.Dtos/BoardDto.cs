@@ -8,6 +8,7 @@ namespace WorkBoard.Application.Dtos
 		public BoardDto()
 		{
 			Users = new List<UserDto>();
+			Columns = new List<BoardColumnDto>();
 		}
 
         public int Id { get; set; }
@@ -15,6 +16,8 @@ namespace WorkBoard.Application.Dtos
         public string Title { get; set; }
 
         public List<UserDto> Users { get; set; }
+
+        public List<BoardColumnDto> Columns { get; set; }
 
         public string Description { get; set; }
 

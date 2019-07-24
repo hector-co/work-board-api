@@ -24,6 +24,7 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Repository
         {
             var ctx = _unitOfWork.CurrentContext;
 			var dataAccessObject = ctx.Set<BoardDtoDataAccess>()
+                .Include(m => m.Columns)
                 .Include(m => m.UsersDataAccess).ThenInclude(r => r.User)
                 .AsNoTracking()
                 .FirstOrDefault(m => m.Id == id);
@@ -41,6 +42,7 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Repository
         {
             var ctx = _unitOfWork.CurrentContext;
 			var dataAccessObject = ctx.Set<BoardDtoDataAccess>()
+                .Include(m => m.Columns)
                 .Include(m => m.UsersDataAccess).ThenInclude(r => r.User)
                 .AsNoTracking()
                 .FirstOrDefault(m => m.Guid == guid);
@@ -71,6 +73,7 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Repository
             }
 			aggregate.SetPropertyValue("Id", id);
 			var dataAccessObject = ctx.Set<BoardDtoDataAccess>()
+                .Include(m => m.Columns)
                 .Include(m => m.UsersDataAccess).ThenInclude(r => r.User)
                 .FirstOrDefault(m => m.Id == id);
             aggregate.AggregateVersion++;

@@ -10,6 +10,7 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Queries
             (this IQueryable<BoardDtoDataAccess> queryable)
         {
             return queryable
+                .Include(m => m.Columns)
                 .Include(m => m.UsersDataAccess).ThenInclude(r => r.User)
                 ;
         }
