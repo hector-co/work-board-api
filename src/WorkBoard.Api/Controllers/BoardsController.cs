@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using WorkBoard.Application.Queries.Boards;
+using WorkBoard.Application.Commands.BoardCommands;
 
 namespace WorkBoard.Api.Controllers
 {
@@ -31,6 +32,14 @@ namespace WorkBoard.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody]UpdateBoardCommand command)
+        {
+            command.BoardId = id;
+            await _mediator.Send(command);
+            return Ok();
         }
     }
 }
