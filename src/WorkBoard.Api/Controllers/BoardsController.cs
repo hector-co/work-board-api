@@ -34,8 +34,15 @@ namespace WorkBoard.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody]RegisterBoardCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody]UpdateBoardCommand command)
+        public async Task<IActionResult> Update(int id, [FromBody]UpdateBoardCommand command)
         {
             command.BoardId = id;
             await _mediator.Send(command);
