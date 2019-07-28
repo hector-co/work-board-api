@@ -92,8 +92,6 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Board","dbo");
-
-                    b.HasDiscriminator().HasValue("BoardDtoDataAccess");
                 });
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccessUserDto", b =>
@@ -109,12 +107,64 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.ToTable("BoardUser","dbo");
                 });
 
+            modelBuilder.Entity("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccess", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BoardId");
+
+                    b.Property<int>("Color");
+
+                    b.Property<int>("ColumnId");
+
+                    b.Property<float>("ConsumedPoints");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("Done");
+
+                    b.Property<float>("EstimatedPoints");
+
+                    b.Property<Guid>("Guid");
+
+                    b.Property<int>("Order");
+
+                    b.Property<int>("Priority");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BoardId");
+
+                    b.HasIndex("ColumnId");
+
+                    b.ToTable("Card","dbo");
+                });
+
+            modelBuilder.Entity("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccessUserDto", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("CardId");
+
+                    b.HasKey("UserId", "CardId");
+
+                    b.HasIndex("CardId");
+
+                    b.ToTable("CardUser","dbo");
+                });
+
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardColumnDataAccess.BoardColumnDtoDataAccess", b =>
                 {
                     b.HasOne("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess", "BoardDataAccess")
                         .WithMany()
                         .HasForeignKey("BoardId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccessUserDto", b =>
@@ -122,6 +172,32 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.HasOne("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess", "Board")
                         .WithMany("UsersDataAccess")
                         .HasForeignKey("BoardId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WorkBoard.Application.Dtos.UserDto", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccess", b =>
+                {
+                    b.HasOne("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess", "BoardDataAccess")
+                        .WithMany()
+                        .HasForeignKey("BoardId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WorkBoard.DataAccess.Ef.BoardColumnDataAccess.BoardColumnDtoDataAccess", "ColumnDataAccess")
+                        .WithMany()
+                        .HasForeignKey("ColumnId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccessUserDto", b =>
+                {
+                    b.HasOne("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccess", "Card")
+                        .WithMany("OwnersDataAccess")
+                        .HasForeignKey("CardId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WorkBoard.Application.Dtos.UserDto", "User")

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WorkBoard.Application.Dtos
 {
@@ -11,6 +12,7 @@ namespace WorkBoard.Application.Dtos
 
         public int Id { get; set; }
 
+        [NotMapped]
         public BoardDto Board { get; set; }
 
         public string Title { get; set; }

@@ -9,11 +9,11 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess
     public class BoardColumnDtoDataAccessConfiguration : IEntityTypeConfiguration<BoardColumnDtoDataAccess>
     {
         static BoardColumnDtoDataAccessConfiguration()
-		{
+        {
             TypeAdapterConfig<BoardColumnDtoDataAccess, BoardColumnDto>.ForType()
                 .Map(dst => dst.Board, src => src.BoardDataAccess)
             ;
-		}
+        }
 
         public void Configure(EntityTypeBuilder<BoardColumnDtoDataAccess> builder)
         {
@@ -22,7 +22,8 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess
             builder.HasOne(m => m.BoardDataAccess)
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey("BoardId");
+                .HasForeignKey("BoardId")
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

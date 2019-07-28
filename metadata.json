@@ -39,9 +39,29 @@
         "Id": "int",
         "Board": "Board",
         "Title": "string",
-        "Order": "int",
         "Description": "string",
+        "Order": "int",
         "Active": "bool"
+      },
+      "identifier": "Id"
+    },
+    "Card": {
+      "properties": {
+        "Id": "int",
+        "Board": "Board",
+        "Column": "BoardColumn",
+        "Title": "string",
+        "Description": "string",
+        "Color": "int",
+        "Owners": {
+          "type": "List<User>",
+          "withMany": true
+        },
+        "Priority": "CardPriority",
+        "EstimatedPoints": "float",
+        "ConsumedPoints": "float",
+        "Done": "bool",
+        "Order": "int"
       },
       "identifier": "Id"
     }
@@ -49,6 +69,9 @@
   "enums": {
     "BoardState": {
       "values": [ "Open", "Closed" ]
+    },
+    "CardPriority": {
+      "values": [ "Low", "Medium", "High" ]
     }
   },
   "skip": [],
