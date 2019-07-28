@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WorkBoard.Application.Dtos;
+using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
 using WorkBoard.DataAccess.Ef.BoardDataAccess;
 
 namespace WorkBoard.DataAccess.Ef
@@ -69,27 +70,6 @@ namespace WorkBoard.DataAccess.Ef
                                 UserId = 1
                             }
                         },
-                        //Columns = new List<BoardColumnDto>
-                        //{
-                        //    new BoardColumnDto
-                        //    {
-                        //        Title = "To do",
-                        //        Description = "",
-                        //        Active = true
-                        //    },
-                        //    new BoardColumnDto
-                        //    {
-                        //        Title = "In progress",
-                        //        Description = "",
-                        //        Active = true
-                        //    },
-                        //    new BoardColumnDto
-                        //    {
-                        //        Title = "Done",
-                        //        Description = "",
-                        //        Active = true
-                        //    }
-                        //},
                         Description = "",
                         State = BoardState.Open,
                         Guid = Guid.NewGuid(),
@@ -114,29 +94,71 @@ namespace WorkBoard.DataAccess.Ef
                                 UserId = 3
                             }
                         },
-                        //Columns =
-                        //{
-                        //    new BoardColumnDto
-                        //    {
-                        //        Title = "To do",
-                        //        Description = "",
-                        //        Active = true
-                        //    },
-                        //    new BoardColumnDto
-                        //    {
-                        //        Title = "In progress",
-                        //        Description = "",
-                        //        Active = true
-                        //    },
-                        //    new BoardColumnDto
-                        //    {
-                        //        Title = "Done",
-                        //        Description = "",
-                        //        Active = true
-                        //    }
-                        //},
                         Description = "",
                         State = BoardState.Open,
+                        Guid = Guid.NewGuid(),
+                        Version = 1
+                    }
+                });
+                context.SaveChanges();
+            }
+
+            if (!context.Set<BoardColumnDtoDataAccess>().Any())
+            {
+                context.Set<BoardColumnDtoDataAccess>().AddRange(new[]
+                {
+                    new BoardColumnDtoDataAccess
+                    {
+                        Title = "To do",
+                        Description = "",
+                        Active = true,
+                        BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 1),
+                        Guid = Guid.NewGuid(),
+                        Version = 1
+                    },
+                    new BoardColumnDtoDataAccess
+                    {
+                        Title = "In progress",
+                        Description = "",
+                        Active = true,
+                        BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 1),
+                        Guid = Guid.NewGuid(),
+                        Version = 1
+                    },
+                    new BoardColumnDtoDataAccess
+                    {
+                        Title = "Done",
+                        Description = "",
+                        Active = true,
+                        BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 1),
+                        Guid = Guid.NewGuid(),
+                        Version = 1
+                    },
+
+                    new BoardColumnDtoDataAccess
+                    {
+                        Title = "To do",
+                        Description = "",
+                        Active = true,
+                        BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 2),
+                        Guid = Guid.NewGuid(),
+                        Version = 1
+                    },
+                    new BoardColumnDtoDataAccess
+                    {
+                        Title = "In progress",
+                        Description = "",
+                        Active = true,
+                        BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 2),
+                        Guid = Guid.NewGuid(),
+                        Version = 1
+                    },
+                    new BoardColumnDtoDataAccess
+                    {
+                        Title = "Done",
+                        Description = "",
+                        Active = true,
+                        BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 2),
                         Guid = Guid.NewGuid(),
                         Version = 1
                     }
