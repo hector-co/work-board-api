@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
@@ -21,7 +22,9 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Commands
             var boardDto = new BoardDtoDataAccess
             {
                 Title = request.Title,
-                Description = request.Description
+                Description = request.Description,
+                Version = 1,
+                Guid = Guid.NewGuid()
             };
             _context.Set<BoardDtoDataAccess>().Add(boardDto);
             return await Unit.Task;

@@ -11,7 +11,7 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess
         static BoardColumnDtoDataAccessConfiguration()
 		{
             TypeAdapterConfig<BoardColumnDtoDataAccess, BoardColumnDto>.ForType()
-                .Map(dst => dst.Board, src => src.BoardDataAccess)
+                //.Map(dst => dst.Board, src => src.BoardDataAccess)
             ;
 		}
 

@@ -33,7 +33,7 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Queries
             efQuery = efQuery.ApplySortAndPaging(request);
 
 			efQuery = efQuery.AddIncludes();
-            
+
             result.Data = (await efQuery
                 .ToListAsync(cancellationToken))
                 .Adapt<List<BoardColumnDto>>();

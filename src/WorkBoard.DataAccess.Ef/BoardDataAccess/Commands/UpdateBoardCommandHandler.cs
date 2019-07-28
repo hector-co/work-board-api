@@ -21,6 +21,7 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Commands
             var boardDto = await _context.Set<BoardDtoDataAccess>().FindAsync(request.BoardId);
             boardDto.Title = request.Title;
             boardDto.Description = request.Description;
+            boardDto.Version++;
             return await Unit.Task;
         }
     }

@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using WorkBoard.Application.Queries.Boards;
 using WorkBoard.Application.Commands.BoardCommands;
+using WorkBoard.Application.Queries.BoardColumns;
+using Qurl;
+using WorkBoard.Application.Commands.BoardColumnCommands;
 
 namespace WorkBoard.Api.Controllers
 {
@@ -45,6 +48,46 @@ namespace WorkBoard.Api.Controllers
         public async Task<IActionResult> Update(int id, [FromBody]UpdateBoardCommand command)
         {
             command.BoardId = id;
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpGet("{id}/columns")]
+        public async Task<IActionResult> GetColumns(int id, [FromQuery]BoardColumnDtoPagedQuery query, CancellationToken cancellationToken)
+        {
+            query.Filter.BoardId = new EqualsFilterProperty<int>
+            {
+                Value = id
+            };
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpPost("{id}/columns")]
+        public async Task<IActionResult> AddColumn(int id, [FromBody]AddColumnCommand command)
+        {
+            command.BoardId = id;
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpPut("{id}/columns/{columnId}")]
+        public async Task<IActionResult> EditColumn(int id, int columnId, [FromBody]EditColumnCommand command)
+        {
+            command.BoardId = id;
+            command.ColumnId = columnId;
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpDelete("{id}/columns/{columnId}")]
+        public async Task<IActionResult> DeleteColumn(int id, int columnId)
+        {
+            var command = new DeleteColumnCommand
+            {
+                BoardId = id,
+                ColumnId = columnId
+            };
             await _mediator.Send(command);
             return Ok();
         }
