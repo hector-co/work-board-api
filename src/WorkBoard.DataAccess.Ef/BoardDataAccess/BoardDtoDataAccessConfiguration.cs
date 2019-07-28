@@ -19,10 +19,6 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess
         {
             builder.ToTable("Board", WorkBoardContext.WorkBoardSchema);
             builder.Ignore(m => m.Users);
-			builder.HasMany(m => m.Columns)
-				.WithOne()
-				.HasForeignKey("BoardId")
-                .IsRequired();
         }
     }
 }

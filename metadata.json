@@ -29,7 +29,6 @@
           "type": "List<User>",
           "withMany": true
         },
-        "Columns": "List<BoardColumn>",
         "Description": "string",
         "State": "BoardState"
       },
@@ -38,18 +37,18 @@
     "BoardColumn": {
       "properties": {
         "Id": "int",
+        "Board": "Board",
         "Title": "string",
         "Order": "int",
         "Description": "string",
         "Active": "bool"
       },
-      "identifier": "Id",
-      "queryable": "false"
+      "identifier": "Id"
     }
   },
   "enums": {
     "BoardState": {
-      "values": [ "Open", "Closed", "ReOpen" ]
+      "values": [ "Open", "Closed" ]
     }
   },
   "skip": [],

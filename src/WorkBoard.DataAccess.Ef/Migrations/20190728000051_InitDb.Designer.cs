@@ -10,7 +10,7 @@ using WorkBoard.DataAccess.Ef;
 namespace WorkBoard.DataAccess.Ef.Migrations
 {
     [DbContext(typeof(WorkBoardContext))]
-    [Migration("20190724031735_InitDb")]
+    [Migration("20190728000051_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,29 +20,6 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("WorkBoard.Application.Dtos.BoardColumnDto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Active");
-
-                    b.Property<int>("BoardId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<int>("Order");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BoardId");
-
-                    b.ToTable("BoardColumn","dbo");
-                });
 
             modelBuilder.Entity("WorkBoard.Application.Dtos.UserDto", b =>
                 {
@@ -71,6 +48,33 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.ToTable("User","dbo");
                 });
 
+            modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardColumnDataAccess.BoardColumnDtoDataAccess", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active");
+
+                    b.Property<int>("BoardId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<Guid>("Guid");
+
+                    b.Property<int>("Order");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BoardId");
+
+                    b.ToTable("BoardColumn","dbo");
+                });
+
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess", b =>
                 {
                     b.Property<int>("Id")
@@ -90,6 +94,8 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Board","dbo");
+
+                    b.HasDiscriminator().HasValue("BoardDtoDataAccess");
                 });
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccessUserDto", b =>
@@ -105,10 +111,10 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.ToTable("BoardUser","dbo");
                 });
 
-            modelBuilder.Entity("WorkBoard.Application.Dtos.BoardColumnDto", b =>
+            modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardColumnDataAccess.BoardColumnDtoDataAccess", b =>
                 {
-                    b.HasOne("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess")
-                        .WithMany("Columns")
+                    b.HasOne("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess", "BoardDataAccess")
+                        .WithMany()
                         .HasForeignKey("BoardId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

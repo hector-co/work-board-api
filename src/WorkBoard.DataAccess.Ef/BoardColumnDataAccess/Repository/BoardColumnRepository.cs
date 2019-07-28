@@ -9,60 +9,60 @@ using Hco.Base.DataAccess.Ef;
 using WorkBoard.Domain.Model;
 using WorkBoard.Application.Dtos;
 
-namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Repository
+namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Repository
 {
-    public class BoardRepository : IBoardRepository
+    public class BoardColumnRepository : IBoardColumnRepository
     {
 		private readonly UnitOfWorkEf<WorkBoardContext> _unitOfWork;
 
-        public BoardRepository(IUnitOfWork unitOfWork)
+        public BoardColumnRepository(IUnitOfWork unitOfWork)
         {
             _unitOfWork = (UnitOfWorkEf<WorkBoardContext>)unitOfWork;
         }
 
-		public Board GetById(int id)
+		public BoardColumn GetById(int id)
         {
             var ctx = _unitOfWork.CurrentContext;
-			var dataAccessObject = ctx.Set<BoardDtoDataAccess>()
-                .Include(m => m.UsersDataAccess).ThenInclude(r => r.User)
+			var dataAccessObject = ctx.Set<BoardColumnDtoDataAccess>()
+                .Include(m => m.BoardDataAccess)
                 .AsNoTracking()
                 .FirstOrDefault(m => m.Id == id);
             if (dataAccessObject == null) return null;
-            var board = BoardDataAccessMapper.Map(ctx, dataAccessObject);
-            return board;
+            var boardColumn = BoardColumnDataAccessMapper.Map(ctx, dataAccessObject);
+            return boardColumn;
         }
 
-		public Board GetById(int id, int version)
+		public BoardColumn GetById(int id, int version)
         {
             throw new NotSupportedException();
         }
 
-		public Board GetByGuid(Guid guid)
+		public BoardColumn GetByGuid(Guid guid)
         {
             var ctx = _unitOfWork.CurrentContext;
-			var dataAccessObject = ctx.Set<BoardDtoDataAccess>()
-                .Include(m => m.UsersDataAccess).ThenInclude(r => r.User)
+			var dataAccessObject = ctx.Set<BoardColumnDtoDataAccess>()
+                .Include(m => m.BoardDataAccess)
                 .AsNoTracking()
                 .FirstOrDefault(m => m.Guid == guid);
             if (dataAccessObject == null) return null;
-            var board = BoardDataAccessMapper.Map(ctx, dataAccessObject);
-            return board;
+            var boardColumn = BoardColumnDataAccessMapper.Map(ctx, dataAccessObject);
+            return boardColumn;
         }
 
-		public Board GetByGuid(Guid guid, int version)
+		public BoardColumn GetByGuid(Guid guid, int version)
         {
             throw new NotSupportedException();
         }
 
-        public void Save(Board aggregate)
+        public void Save(BoardColumn aggregate)
         {
             var ctx = _unitOfWork.CurrentContext;
-            var dataAccessObject = BoardDataAccessMapper.Map(ctx, aggregate);
-			ctx.Set<BoardDtoDataAccess>().Add(dataAccessObject);
+            var dataAccessObject = BoardColumnDataAccessMapper.Map(ctx, aggregate);
+			ctx.Set<BoardColumnDtoDataAccess>().Add(dataAccessObject);
             _unitOfWork.TrackAggregate(aggregate, () => aggregate.SetPropertyValue("Id", dataAccessObject.Id));
         }
 
-        public void Update(int id, Board aggregate)
+        public void Update(int id, BoardColumn aggregate)
         {
             var ctx = _unitOfWork.CurrentContext;
             if (GetVersion(id) != aggregate.AggregateVersion)
@@ -70,18 +70,18 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Repository
                 throw new AggregateVersionException();
             }
 			aggregate.SetPropertyValue("Id", id);
-			var dataAccessObject = ctx.Set<BoardDtoDataAccess>()
-                .Include(m => m.UsersDataAccess).ThenInclude(r => r.User)
+			var dataAccessObject = ctx.Set<BoardColumnDtoDataAccess>()
+                .Include(m => m.BoardDataAccess)
                 .FirstOrDefault(m => m.Id == id);
             aggregate.AggregateVersion++;
-            BoardDataAccessMapper.Map(ctx, aggregate, ref dataAccessObject);
+            BoardColumnDataAccessMapper.Map(ctx, aggregate, ref dataAccessObject);
 			_unitOfWork.TrackAggregate(aggregate);
         }
 
         public int GetVersion(int id)
         {
             var ctx = _unitOfWork.CurrentContext;
-            return ctx.Set<BoardDtoDataAccess>().FirstOrDefault(m => m.Id == id)?.Version ?? 0;
+            return ctx.Set<BoardColumnDtoDataAccess>().FirstOrDefault(m => m.Id == id)?.Version ?? 0;
         }
     }
 }

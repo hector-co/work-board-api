@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using WorkBoard.DataAccess.Ef.UserDataAccess;
 using WorkBoard.DataAccess.Ef.BoardDataAccess;
+using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
 using WorkBoard.Application.Dtos;
 
 namespace WorkBoard.DataAccess.Ef
@@ -19,7 +20,7 @@ namespace WorkBoard.DataAccess.Ef
             modelBuilder.ApplyConfiguration(new UserDtoConfiguration());
             modelBuilder.ApplyConfiguration(new BoardDtoDataAccessConfiguration());
             modelBuilder.ApplyConfiguration(new BoardDtoDataAccessUserDtoConfiguration());
-            modelBuilder.ApplyConfiguration(new BoardColumnDtoConfiguration());
+            modelBuilder.ApplyConfiguration(new BoardColumnDtoDataAccessConfiguration());
         }
 	}
 

@@ -4,8 +4,9 @@ using Hco.Base.Domain;
 
 namespace WorkBoard.Domain.Model
 {
-    public class BoardColumn : Entity<int>
+    public class BoardColumn : AggregateRoot<int>
     {
+        private int _boardId;
         private string _title;
         private int _order;
         private string _description;

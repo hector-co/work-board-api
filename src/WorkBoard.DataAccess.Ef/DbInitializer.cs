@@ -69,27 +69,27 @@ namespace WorkBoard.DataAccess.Ef
                                 UserId = 1
                             }
                         },
-                        Columns = new List<BoardColumnDto>
-                        {
-                            new BoardColumnDto
-                            {
-                                Title = "To do",
-                                Description = "",
-                                Active = true
-                            },
-                            new BoardColumnDto
-                            {
-                                Title = "In progress",
-                                Description = "",
-                                Active = true
-                            },
-                            new BoardColumnDto
-                            {
-                                Title = "Done",
-                                Description = "",
-                                Active = true
-                            }
-                        },
+                        //Columns = new List<BoardColumnDto>
+                        //{
+                        //    new BoardColumnDto
+                        //    {
+                        //        Title = "To do",
+                        //        Description = "",
+                        //        Active = true
+                        //    },
+                        //    new BoardColumnDto
+                        //    {
+                        //        Title = "In progress",
+                        //        Description = "",
+                        //        Active = true
+                        //    },
+                        //    new BoardColumnDto
+                        //    {
+                        //        Title = "Done",
+                        //        Description = "",
+                        //        Active = true
+                        //    }
+                        //},
                         Description = "",
                         State = BoardState.Open,
                         Guid = Guid.NewGuid(),
@@ -114,27 +114,27 @@ namespace WorkBoard.DataAccess.Ef
                                 UserId = 3
                             }
                         },
-                        Columns =
-                        {
-                            new BoardColumnDto
-                            {
-                                Title = "To do",
-                                Description = "",
-                                Active = true
-                            },
-                            new BoardColumnDto
-                            {
-                                Title = "In progress",
-                                Description = "",
-                                Active = true
-                            },
-                            new BoardColumnDto
-                            {
-                                Title = "Done",
-                                Description = "",
-                                Active = true
-                            }
-                        },
+                        //Columns =
+                        //{
+                        //    new BoardColumnDto
+                        //    {
+                        //        Title = "To do",
+                        //        Description = "",
+                        //        Active = true
+                        //    },
+                        //    new BoardColumnDto
+                        //    {
+                        //        Title = "In progress",
+                        //        Description = "",
+                        //        Active = true
+                        //    },
+                        //    new BoardColumnDto
+                        //    {
+                        //        Title = "Done",
+                        //        Description = "",
+                        //        Active = true
+                        //    }
+                        //},
                         Description = "",
                         State = BoardState.Open,
                         Guid = Guid.NewGuid(),

@@ -61,6 +61,8 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     Order = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Active = table.Column<bool>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Guid = table.Column<Guid>(nullable: false),
                     BoardId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
