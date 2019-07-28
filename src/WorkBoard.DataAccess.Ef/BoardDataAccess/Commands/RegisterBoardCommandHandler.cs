@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
-using MediatR;
 using WorkBoard.Application.Commands.BoardCommands;
 
 namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Commands
@@ -17,7 +16,7 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Commands
             _context = ((UnitOfWorkEf<WorkBoardContext>)unitOfWork).CurrentContext;
         }
 
-        public async Task<Unit> Handle(RegisterBoardCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(RegisterBoardCommand request, CancellationToken cancellationToken)
         {
             var boardDto = new BoardDtoDataAccess
             {
@@ -27,7 +26,8 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Commands
                 Guid = Guid.NewGuid()
             };
             _context.Set<BoardDtoDataAccess>().Add(boardDto);
-            return await Unit.Task;
+            await _context.SaveChangesAsync(cancellationToken);
+            return boardDto.Id;
         }
     }
 }

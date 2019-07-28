@@ -19,7 +19,7 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
             _context = ((UnitOfWorkEf<WorkBoardContext>)unitOfWork).CurrentContext;
         }
 
-        public async Task<Unit> Handle(AddColumnCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddColumnCommand request, CancellationToken cancellationToken)
         {
             var maxOrder = 1;
             if (_context.Set<BoardColumnDtoDataAccess>().Count(c => c.BoardDataAccess.Id == request.BoardId) > 0)
@@ -37,8 +37,9 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
                 Guid = Guid.NewGuid()
             };
             _context.Set<BoardColumnDtoDataAccess>().Add(columnDto);
+            await _context.SaveChangesAsync();
 
-            return await Unit.Task;
+            return columnDto.Id;
         }
     }
 }

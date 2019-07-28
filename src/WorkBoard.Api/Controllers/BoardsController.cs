@@ -38,10 +38,13 @@ namespace WorkBoard.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody]RegisterBoardCommand command)
+        public async Task<IActionResult> Register([FromBody]RegisterBoardCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(command);
-            return Ok();
+            var id = await _mediator.Send(command, cancellationToken);
+
+            var getByIdQuery = new BoardDtoGetByIdQuery(id);
+            var result = await _mediator.Send(getByIdQuery, cancellationToken);
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
@@ -64,11 +67,14 @@ namespace WorkBoard.Api.Controllers
         }
 
         [HttpPost("{id}/columns")]
-        public async Task<IActionResult> AddColumn(int id, [FromBody]AddColumnCommand command)
+        public async Task<IActionResult> AddColumn(int id, [FromBody]AddColumnCommand command, CancellationToken cancellationToken)
         {
             command.BoardId = id;
-            await _mediator.Send(command);
-            return Ok();
+            var columnId = await _mediator.Send(command, cancellationToken);
+
+            var getByIdQuery = new BoardColumnDtoGetByIdQuery(columnId);
+            var result = await _mediator.Send(getByIdQuery, cancellationToken);
+            return Ok(result);
         }
 
         [HttpPut("{id}/columns/{columnId}")]
