@@ -21,7 +21,7 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
 
         public async Task<int> Handle(AddColumnCommand request, CancellationToken cancellationToken)
         {
-            var maxOrder = 1;
+            var maxOrder = 0;
             if (_context.Set<BoardColumnDtoDataAccess>().Count(c => c.BoardDataAccess.Id == request.BoardId) > 0)
             {
                 maxOrder = _context.Set<BoardColumnDtoDataAccess>().Where(c => c.BoardDataAccess.Id == request.BoardId).Max(c => c.Order);
