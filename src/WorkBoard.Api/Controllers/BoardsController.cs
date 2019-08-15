@@ -7,8 +7,6 @@ using WorkBoard.Application.Commands.BoardCommands;
 using WorkBoard.Application.Queries.BoardColumns;
 using Qurl;
 using WorkBoard.Application.Commands.BoardColumnCommands;
-using WorkBoard.Application.Queries.Cards;
-using WorkBoard.Application.Commands.CardCommands;
 
 namespace WorkBoard.Api.Controllers
 {
@@ -100,24 +98,5 @@ namespace WorkBoard.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("{id}/cards")]
-        public async Task<IActionResult> ListCards(int id, [FromQuery]CardDtoPagedQuery query, CancellationToken cancellationToken)
-        {
-            query.Filter.BoardId = new EqualsFilterProperty<int>
-            {
-                Value = id
-            };
-            query.Limit = int.MaxValue;
-            var result = await _mediator.Send(query, cancellationToken);
-            return Ok(result);
-        }
-
-        [HttpPost("{id}/cards")]
-        public async Task<IActionResult> AddCard(int id, [FromBody]AddCardCommand command, CancellationToken cancellationToken)
-        {
-            command.BoardId = id;
-            var cardId = await _mediator.Send(command);
-            return await Get(cardId, cancellationToken);
-        }
     }
 }

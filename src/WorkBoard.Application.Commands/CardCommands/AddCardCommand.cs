@@ -5,7 +5,6 @@ namespace WorkBoard.Application.Commands.CardCommands
 {
     public class AddCardCommand : IRequest<int>
     {
-        [JsonIgnore]
         public int BoardId { get; set; }
 
         public int? ColumnId { get; set; }
