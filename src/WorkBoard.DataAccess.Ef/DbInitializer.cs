@@ -113,6 +113,7 @@ namespace WorkBoard.DataAccess.Ef
                         Description = "",
                         Active = true,
                         BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 1),
+                        Order = 1,
                         Guid = Guid.NewGuid(),
                         Version = 1
                     },
@@ -122,6 +123,7 @@ namespace WorkBoard.DataAccess.Ef
                         Description = "",
                         Active = true,
                         BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 1),
+                        Order = 2,
                         Guid = Guid.NewGuid(),
                         Version = 1
                     },
@@ -131,6 +133,7 @@ namespace WorkBoard.DataAccess.Ef
                         Description = "",
                         Active = true,
                         BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 1),
+                        Order = 3,
                         Guid = Guid.NewGuid(),
                         Version = 1
                     },
@@ -141,6 +144,7 @@ namespace WorkBoard.DataAccess.Ef
                         Description = "",
                         Active = true,
                         BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 2),
+                        Order = 1,
                         Guid = Guid.NewGuid(),
                         Version = 1
                     },
@@ -150,6 +154,7 @@ namespace WorkBoard.DataAccess.Ef
                         Description = "",
                         Active = true,
                         BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 2),
+                        Order = 2,
                         Guid = Guid.NewGuid(),
                         Version = 1
                     },
@@ -159,6 +164,7 @@ namespace WorkBoard.DataAccess.Ef
                         Description = "",
                         Active = true,
                         BoardDataAccess = context.Set<BoardDtoDataAccess>().FirstOrDefault(b => b.Id == 2),
+                        Order = 3,
                         Guid = Guid.NewGuid(),
                         Version = 1
                     }
