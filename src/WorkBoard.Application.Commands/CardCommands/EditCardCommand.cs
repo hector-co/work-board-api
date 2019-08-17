@@ -1,12 +1,12 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 
 namespace WorkBoard.Application.Commands.CardCommands
 {
-    public class AddCardCommand : IRequest<int>
+    public class EditCardCommand : IRequest
     {
-        public int BoardId { get; set; }
-
-        public int? ColumnId { get; set; }
+        [JsonIgnore]
+        public int Id { get; set; }
 
         public string Title { get; set; }
 

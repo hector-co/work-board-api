@@ -40,5 +40,13 @@ namespace WorkBoard.Api.Controllers
             var cardId = await _mediator.Send(command);
             return await Get(cardId, cancellationToken);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditCard(int id, [FromBody]EditCardCommand command, CancellationToken cancellationToken)
+        {
+            command.Id = id;
+            await _mediator.Send(command);
+            return Ok();
+        }
     }
 }
