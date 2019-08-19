@@ -5,29 +5,26 @@ using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
 using MediatR;
 using WorkBoard.Application.Commands.CardCommands;
-using WorkBoard.Application.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
 {
-    public class EditCardCommandHandler : IEditCardCommandHandler
+    public class UpdateCardPointsCommandHandler : IUpdateCardPointsCommandHandler
     {
         private readonly WorkBoardContext _context;
 
-        public EditCardCommandHandler(IUnitOfWork unitOfWork)
+        public UpdateCardPointsCommandHandler(IUnitOfWork unitOfWork)
         {
             _context = ((UnitOfWorkEf<WorkBoardContext>)unitOfWork).CurrentContext;
         }
 
-        public async Task<Unit> Handle(EditCardCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateCardPointsCommand request, CancellationToken cancellationToken)
         {
             var cardDto = _context.Set<CardDtoDataAccess>().FirstOrDefault(c => c.Id == request.CardId);
-            cardDto.Title = request.Title;
-            cardDto.Description = request.Description;
-            cardDto.Color = request.Color;
             cardDto.EstimatedPoints = request.EstimatedPoints;
-            cardDto.Priority = (CardPriority)request.Priority;
+            cardDto.ConsumedPoints = request.ConsumedPoints;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync();
+
             return await Unit.Task;
         }
     }

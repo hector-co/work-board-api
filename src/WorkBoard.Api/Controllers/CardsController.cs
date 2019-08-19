@@ -44,13 +44,21 @@ namespace WorkBoard.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditCard(int id, [FromBody]EditCardCommand command, CancellationToken cancellationToken)
         {
-            command.Id = id;
+            command.CardId = id;
             await _mediator.Send(command, cancellationToken);
             return Ok();
         }
 
         [HttpPost("{id}/move")]
         public async Task<IActionResult> MoveCard(int id, [FromBody]MoveCardCommand command, CancellationToken cancellationToken)
+        {
+            command.CardId = id;
+            await _mediator.Send(command, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPost("{id}/points")]
+        public async Task<IActionResult> UpdateCardPoints(int id, [FromBody]UpdateCardPointsCommand command, CancellationToken cancellationToken)
         {
             command.CardId = id;
             await _mediator.Send(command, cancellationToken);

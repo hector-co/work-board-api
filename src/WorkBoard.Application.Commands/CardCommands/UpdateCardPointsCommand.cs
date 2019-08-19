@@ -3,19 +3,11 @@ using Newtonsoft.Json;
 
 namespace WorkBoard.Application.Commands.CardCommands
 {
-    public class EditCardCommand : IRequest
+    public class UpdateCardPointsCommand : IRequest
     {
         [JsonIgnore]
         public int CardId { get; set; }
-
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public int Color { get; set; }
-
-        public int Priority { get; set; }
-
         public float EstimatedPoints { get; set; }
+        public float ConsumedPoints { get; set; }
     }
 }
