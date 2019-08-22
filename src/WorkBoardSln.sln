@@ -5,19 +5,11 @@ VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.Api", "WorkBoard.Api\WorkBoard.Api.csproj", "{EF67F8E9-A85B-4E89-91CD-8DF2D22EE62F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.Application.Dtos", "WorkBoard.Application.Dtos\WorkBoard.Application.Dtos.csproj", "{A3FDD51C-7424-4651-9CEA-F3D0F4F83941}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.Application.Commands", "WorkBoard.Application.Commands\WorkBoard.Application.Commands.csproj", "{48D5B2FC-632B-4647-A161-143BDCC139B8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.Application.Queries", "WorkBoard.Application.Queries\WorkBoard.Application.Queries.csproj", "{98E9BF4F-4DCB-41C7-9418-2417DAEEB085}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.Application", "WorkBoard.Application\WorkBoard.Application.csproj", "{5446C1B6-2133-411D-A074-490E6142699E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.DataAccess.Ef", "WorkBoard.DataAccess.Ef\WorkBoard.DataAccess.Ef.csproj", "{6008A846-2005-4703-BAAE-6C23C9EB2EAC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.Domain", "WorkBoard.Domain\WorkBoard.Domain.csproj", "{B7E27367-465A-4A18-9F6F-3D2F87C8BAA3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.Domain.Events", "WorkBoard.Domain.Events\WorkBoard.Domain.Events.csproj", "{4FE20B29-71DF-4314-B5AF-C7A927CBB928}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkBoard.IocConfig", "WorkBoard.IocConfig\WorkBoard.IocConfig.csproj", "{14C64331-0421-4955-943B-39A81383066B}"
 EndProject
@@ -36,18 +28,6 @@ Global
 		{EF67F8E9-A85B-4E89-91CD-8DF2D22EE62F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF67F8E9-A85B-4E89-91CD-8DF2D22EE62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF67F8E9-A85B-4E89-91CD-8DF2D22EE62F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3FDD51C-7424-4651-9CEA-F3D0F4F83941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3FDD51C-7424-4651-9CEA-F3D0F4F83941}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3FDD51C-7424-4651-9CEA-F3D0F4F83941}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3FDD51C-7424-4651-9CEA-F3D0F4F83941}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48D5B2FC-632B-4647-A161-143BDCC139B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48D5B2FC-632B-4647-A161-143BDCC139B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48D5B2FC-632B-4647-A161-143BDCC139B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48D5B2FC-632B-4647-A161-143BDCC139B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98E9BF4F-4DCB-41C7-9418-2417DAEEB085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98E9BF4F-4DCB-41C7-9418-2417DAEEB085}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98E9BF4F-4DCB-41C7-9418-2417DAEEB085}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98E9BF4F-4DCB-41C7-9418-2417DAEEB085}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5446C1B6-2133-411D-A074-490E6142699E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5446C1B6-2133-411D-A074-490E6142699E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5446C1B6-2133-411D-A074-490E6142699E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,10 +40,6 @@ Global
 		{B7E27367-465A-4A18-9F6F-3D2F87C8BAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7E27367-465A-4A18-9F6F-3D2F87C8BAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7E27367-465A-4A18-9F6F-3D2F87C8BAA3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FE20B29-71DF-4314-B5AF-C7A927CBB928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FE20B29-71DF-4314-B5AF-C7A927CBB928}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FE20B29-71DF-4314-B5AF-C7A927CBB928}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FE20B29-71DF-4314-B5AF-C7A927CBB928}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14C64331-0421-4955-943B-39A81383066B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14C64331-0421-4955-943B-39A81383066B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14C64331-0421-4955-943B-39A81383066B}.Release|Any CPU.ActiveCfg = Release|Any CPU

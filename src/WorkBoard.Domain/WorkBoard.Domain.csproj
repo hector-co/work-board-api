@@ -8,8 +8,4 @@
     <PackageReference Include="Hco.Base.Domain" Version="0.5.4" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WorkBoard.Domain.Events\WorkBoard.Domain.Events.csproj" />
-  </ItemGroup>
-
 </Project>

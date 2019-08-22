@@ -12,10 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkBoard.Application.Commands\WorkBoard.Application.Commands.csproj" />
-    <ProjectReference Include="..\WorkBoard.Application.Queries\WorkBoard.Application.Queries.csproj" />
     <ProjectReference Include="..\WorkBoard.Application\WorkBoard.Application.csproj" />
-    <ProjectReference Include="..\WorkBoard.Domain.Events\WorkBoard.Domain.Events.csproj" />
     <ProjectReference Include="..\WorkBoard.Domain\WorkBoard.Domain.csproj" />
   </ItemGroup>
 

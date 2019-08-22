@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkBoard.Application.Dtos\WorkBoard.Application.Dtos.csproj" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Qurl" Version="0.5.2" />
   </ItemGroup>
 
 </Project>
