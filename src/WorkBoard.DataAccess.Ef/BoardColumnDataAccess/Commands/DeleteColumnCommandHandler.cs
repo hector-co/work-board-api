@@ -1,9 +1,12 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
 using MediatR;
 using WorkBoard.Application.Commands.BoardColumnCommands;
+using WorkBoard.Application.Exceptions;
+using WorkBoard.DataAccess.Ef.CardDataAccess;
 
 namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
 {
@@ -18,8 +21,11 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
 
         public async Task<Unit> Handle(DeleteColumnCommand request, CancellationToken cancellationToken)
         {
-            // TODO validate column can not be removed if contains cards
+            if (_context.Set<CardDtoDataAccess>().Any(c => c.ColumnDataAccess.Id == request.ColumnId))
+                throw new CommandException();
+
             var columnDto = _context.Set<BoardColumnDtoDataAccess>().Find(request.ColumnId);
+
             _context.Set<BoardColumnDtoDataAccess>().Remove(columnDto);
             return await Unit.Task;
         }
