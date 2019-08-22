@@ -54,11 +54,15 @@ namespace WorkBoard.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //TODO: verify for production
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //TODO: verify for production
                 app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            }
+            else if (env.IsStaging())
+            {
+                app.UseCors(options => options.WithOrigins(Configuration["AllowedHosts"]).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             }
 
             app.UseHttpsRedirection();
