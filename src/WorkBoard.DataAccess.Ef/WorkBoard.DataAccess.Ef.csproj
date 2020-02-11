@@ -1,19 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hco.Base.DataAccess.Ef" Version="0.5.12" />
-    <PackageReference Include="Mapster" Version="4.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
-    <PackageReference Include="Qurl" Version="0.5.2" />
+    <PackageReference Include="Hco.Base.DataAccess.Ef" Version="0.5.15" />
+    <PackageReference Include="Mapster" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkBoard.Application\WorkBoard.Application.csproj" />
+    <ProjectReference Include="..\WorkBoard.Commands\WorkBoard.Commands.csproj" />
     <ProjectReference Include="..\WorkBoard.Domain\WorkBoard.Domain.csproj" />
+    <ProjectReference Include="..\WorkBoard.Dtos\WorkBoard.Dtos.csproj" />
+    <ProjectReference Include="..\WorkBoard.Queries\WorkBoard.Queries.csproj" />
   </ItemGroup>
 
 </Project>

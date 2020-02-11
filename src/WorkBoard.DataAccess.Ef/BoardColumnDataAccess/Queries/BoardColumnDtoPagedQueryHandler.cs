@@ -4,9 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapster;
 using MediatR;
-using WorkBoard.Application.Queries.BoardColumns;
-using WorkBoard.Application.Dtos;
-using WorkBoard.Application.Queries;
+using WorkBoard.Queries.BoardColumns;
+using WorkBoard.Dtos;
+using WorkBoard.Queries;
 using Qurl.Queryable;
 
 namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Queries

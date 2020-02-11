@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using WorkBoard.DataAccess.Ef.BoardDataAccess;
 using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
 using WorkBoard.DataAccess.Ef.UserDataAccess;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.CardDataAccess
 {

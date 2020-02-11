@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
-using WorkBoard.Application.Commands.BoardCommands;
+using WorkBoard.Commands.BoardCommands;
 
 namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Commands
 {

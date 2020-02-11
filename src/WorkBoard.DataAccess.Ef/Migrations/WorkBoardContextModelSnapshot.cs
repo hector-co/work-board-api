@@ -15,56 +15,37 @@ namespace WorkBoard.DataAccess.Ef.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("WorkBoard.Application.Dtos.UserDto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email");
-
-                    b.Property<Guid>("Guid");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Password");
-
-                    b.Property<string>("Username");
-
-                    b.Property<int>("Version");
-
-                    b.Property<bool>("Veryfied");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User","dbo");
-                });
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardColumnDataAccess.BoardColumnDtoDataAccess", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Active");
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
-                    b.Property<int>("BoardId");
+                    b.Property<int>("BoardId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Guid");
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Order");
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Version");
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -77,17 +58,23 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Guid");
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("State");
+                    b.Property<int>("State")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Version");
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -96,9 +83,11 @@ namespace WorkBoard.DataAccess.Ef.Migrations
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccessUserDto", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("BoardId");
+                    b.Property<int>("BoardId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "BoardId");
 
@@ -111,31 +100,44 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BoardId");
+                    b.Property<int>("BoardId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Color");
+                    b.Property<int>("Color")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ColumnId");
+                    b.Property<int>("ColumnId")
+                        .HasColumnType("int");
 
-                    b.Property<float>("ConsumedPoints");
+                    b.Property<float>("ConsumedPoints")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Done");
+                    b.Property<bool>("Done")
+                        .HasColumnType("bit");
 
-                    b.Property<float>("EstimatedPoints");
+                    b.Property<float>("EstimatedPoints")
+                        .HasColumnType("real");
 
-                    b.Property<Guid>("Guid");
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Order");
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Priority");
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Version");
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -148,9 +150,11 @@ namespace WorkBoard.DataAccess.Ef.Migrations
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccessUserDto", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("CardId");
+                    b.Property<int>("CardId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "CardId");
 
@@ -159,12 +163,49 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.ToTable("CardUser","dbo");
                 });
 
+            modelBuilder.Entity("WorkBoard.Dtos.UserDto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Veryfied")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User","dbo");
+                });
+
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardColumnDataAccess.BoardColumnDtoDataAccess", b =>
                 {
                     b.HasOne("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess", "BoardDataAccess")
                         .WithMany()
                         .HasForeignKey("BoardId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccessUserDto", b =>
@@ -172,12 +213,14 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.HasOne("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess", "Board")
                         .WithMany("UsersDataAccess")
                         .HasForeignKey("BoardId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("WorkBoard.Application.Dtos.UserDto", "User")
+                    b.HasOne("WorkBoard.Dtos.UserDto", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccess", b =>
@@ -185,12 +228,14 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.HasOne("WorkBoard.DataAccess.Ef.BoardDataAccess.BoardDtoDataAccess", "BoardDataAccess")
                         .WithMany()
                         .HasForeignKey("BoardId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WorkBoard.DataAccess.Ef.BoardColumnDataAccess.BoardColumnDtoDataAccess", "ColumnDataAccess")
                         .WithMany()
                         .HasForeignKey("ColumnId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccessUserDto", b =>
@@ -198,12 +243,14 @@ namespace WorkBoard.DataAccess.Ef.Migrations
                     b.HasOne("WorkBoard.DataAccess.Ef.CardDataAccess.CardDtoDataAccess", "Card")
                         .WithMany("OwnersDataAccess")
                         .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("WorkBoard.Application.Dtos.UserDto", "User")
+                    b.HasOne("WorkBoard.Dtos.UserDto", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

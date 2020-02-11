@@ -5,7 +5,7 @@ using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using WorkBoard.Application.Commands.CardCommands;
+using WorkBoard.Commands.CardCommands;
 using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
 
 namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands

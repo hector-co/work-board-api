@@ -2,7 +2,7 @@ using System.Linq;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess
 {

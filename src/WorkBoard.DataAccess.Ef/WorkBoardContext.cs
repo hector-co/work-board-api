@@ -4,7 +4,7 @@ using WorkBoard.DataAccess.Ef.UserDataAccess;
 using WorkBoard.DataAccess.Ef.BoardDataAccess;
 using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
 using WorkBoard.DataAccess.Ef.CardDataAccess;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef
 {

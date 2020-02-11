@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Dtos;
 using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
 using WorkBoard.DataAccess.Ef.BoardDataAccess;
 

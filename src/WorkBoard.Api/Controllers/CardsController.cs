@@ -2,8 +2,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using WorkBoard.Application.Queries.Cards;
-using WorkBoard.Application.Commands.CardCommands;
+using WorkBoard.Queries.Cards;
+using WorkBoard.Commands.CardCommands;
 
 namespace WorkBoard.Api.Controllers
 {

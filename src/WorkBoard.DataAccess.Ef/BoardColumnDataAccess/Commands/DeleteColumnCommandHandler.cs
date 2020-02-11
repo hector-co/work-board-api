@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
 using MediatR;
-using WorkBoard.Application.Commands.BoardColumnCommands;
-using WorkBoard.Application.Exceptions;
+using WorkBoard.Commands.BoardColumnCommands;
+using WorkBoard.Commands.Exceptions;
 using WorkBoard.DataAccess.Ef.CardDataAccess;
 
 namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands

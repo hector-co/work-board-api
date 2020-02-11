@@ -7,7 +7,7 @@ using Hco.Base.DataAccess.Exceptions;
 using Hco.Base.DataAccess;
 using Hco.Base.DataAccess.Ef;
 using WorkBoard.Domain.Model;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Repository
 {

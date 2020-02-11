@@ -1,5 +1,5 @@
 using System;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.CardDataAccess
 {

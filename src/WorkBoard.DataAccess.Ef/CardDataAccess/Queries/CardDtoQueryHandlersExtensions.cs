@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.CardDataAccess.Queries
 {

@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using WorkBoard.Application.Queries.Users;
+using WorkBoard.Queries.Users;
 
 namespace WorkBoard.Api.Controllers
 {

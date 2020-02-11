@@ -2,11 +2,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using WorkBoard.Application.Queries.Boards;
-using WorkBoard.Application.Commands.BoardCommands;
-using WorkBoard.Application.Queries.BoardColumns;
+using WorkBoard.Queries.Boards;
+using WorkBoard.Commands.BoardCommands;
+using WorkBoard.Queries.BoardColumns;
 using Qurl;
-using WorkBoard.Application.Commands.BoardColumnCommands;
+using WorkBoard.Commands.BoardColumnCommands;
 
 namespace WorkBoard.Api.Controllers
 {

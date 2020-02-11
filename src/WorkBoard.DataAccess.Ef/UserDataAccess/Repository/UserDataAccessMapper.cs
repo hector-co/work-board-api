@@ -2,7 +2,7 @@ using System;
 using Mapster;
 using Hco.Base.DataAccess;
 using WorkBoard.Domain.Model;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.UserDataAccess.Repository
 {

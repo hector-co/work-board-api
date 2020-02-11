@@ -4,8 +4,8 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using WorkBoard.Application.Commands.CardCommands;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Commands.CardCommands;
+using WorkBoard.Dtos;
 using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
 using WorkBoard.DataAccess.Ef.BoardDataAccess;
 

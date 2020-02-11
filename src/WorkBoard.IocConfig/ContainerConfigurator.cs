@@ -1,59 +1,57 @@
 ﻿using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain.Events;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using WorkBoard.Application.Exceptions;
-using WorkBoard.DataAccess.Ef;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using WorkBoard.DataAccess.Ef;
 
 namespace WorkBoard.IocConfig
 {
     public static class ContainerConfigurator
     {
-        public static IContainer GetConfiguredContainer(this IServiceCollection services, IConfiguration configuration, IHostingEnvironment env)
+        public static void RegisterContext(this IServiceCollection services, IConfiguration configuration)
         {
-            var builder = new ContainerBuilder();
-
             services.AddDbContext<WorkBoardContext>(options => options.UseSqlServer(configuration.GetConnectionString("WorkBoard")));
+        }
 
-            builder.Populate(services);
+        public static void Configure(this ContainerBuilder builder, IConfiguration configuration)
+        {
+            ConfigureMediatR(builder);
 
-            Configure(builder, configuration, env);
+            builder.RegisterType<UnitOfWorkEf<WorkBoardContext>>().AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.RegisterTypes(typeof(WorkBoardContext).GetTypeInfo().Assembly.GetTypes()).AsImplementedInterfaces();
+
+            Log.Logger = new LoggerConfiguration()
+               .ReadFrom.Configuration(configuration)
+               .CreateLogger();
+
+            builder.RegisterInstance(Log.Logger).AsImplementedInterfaces();
+
+            builder.RegisterType<FakeEventStore>().AsImplementedInterfaces();
+
+            //TODO: register Domain.Services
+
+            Configure(builder, configuration);
 
             var container = builder.Build();
             var dbContext = container.Resolve<WorkBoardContext>();
             dbContext.Database.Migrate();
 
             DbInitializer.AddSampleData(dbContext);
-
-            return container;
         }
 
-        public static void Configure(ContainerBuilder containerBuilder, IConfiguration configuration, IHostingEnvironment env)
+        public static void InitContext(IContainer container)
         {
-            ConfigureMediatR(containerBuilder);
+            var dbContext = container.Resolve<WorkBoardContext>();
+            dbContext.Database.Migrate();
 
-            containerBuilder.RegisterType<UnitOfWorkEf<WorkBoardContext>>().AsImplementedInterfaces().InstancePerLifetimeScope();
-            containerBuilder.RegisterTypes(typeof(WorkBoardContext).GetTypeInfo().Assembly.GetTypes()).AsImplementedInterfaces();
-            containerBuilder.RegisterTypes(typeof(CommandException).GetTypeInfo().Assembly.GetTypes()).AsImplementedInterfaces();
-
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .CreateLogger();
-
-            containerBuilder.RegisterInstance(Log.Logger).AsImplementedInterfaces();
-
-            containerBuilder.RegisterType<FakeEventStore>().AsImplementedInterfaces();
-
-            //TODO: register Domain.Services
+            DbInitializer.AddSampleData(dbContext);
         }
 
         private static void ConfigureMediatR(ContainerBuilder containerBuilder)

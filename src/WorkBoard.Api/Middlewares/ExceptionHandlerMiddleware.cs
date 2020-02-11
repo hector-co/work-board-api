@@ -6,10 +6,10 @@ using Newtonsoft.Json.Serialization;
 using Qurl.Exceptions;
 using Serilog;
 using WorkBoard.Api.Exceptions;
-using WorkBoard.Application.Exceptions;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using WorkBoard.Commands.Exceptions;
 
 namespace WorkBoard.Api.Middlewares
 {

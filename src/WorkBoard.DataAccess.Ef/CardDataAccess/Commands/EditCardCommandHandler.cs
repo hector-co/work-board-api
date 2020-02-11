@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
 using MediatR;
-using WorkBoard.Application.Commands.CardCommands;
-using WorkBoard.Application.Dtos;
+using WorkBoard.Commands.CardCommands;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
 {

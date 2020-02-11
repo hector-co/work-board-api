@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Hco.Base.DataAccess.Ef;
 using Hco.Base.Domain;
 using MediatR;
-using WorkBoard.Application.Commands.BoardColumnCommands;
+using WorkBoard.Commands.BoardColumnCommands;
 
 namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
 {

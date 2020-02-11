@@ -1,76 +1,77 @@
-﻿using Autofac;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.Hosting;
 using Qurl.AspNetCore;
+using System.Text.Json;
 using WorkBoard.Api.Filters;
 using WorkBoard.Api.Middlewares;
 using WorkBoard.IocConfig;
-using System;
 
 namespace WorkBoard.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Enviroment = env;
         }
-
-        public IContainer ApplicationContainer { get; private set; }
 
         public IConfiguration Configuration { get; }
 
-        public IHostingEnvironment Enviroment { get; private set; }
+        public ILifetimeScope AutofacContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(opt =>
+            services.AddControllers(options =>
             {
-                opt.Filters.Add<ValidationActionFilter>();
-                opt.Filters.Add<TransactionActionFilter>();
+                options.Filters.Add<ValidationActionFilter>();
+                options.Filters.Add<TransactionActionFilter>();
             })
-                //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver())
-                .AddFluentValidation();
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase)
+                .AddControllersAsServices();
 
             services.AddQurlModelBinder();
 
             services.AddCors();
 
-            ApplicationContainer = services.GetConfiguredContainer(Configuration, Enviroment);
+            services.RegisterContext(Configuration);
+        }
 
-            // Create the IServiceProvider based on the container.
-            return new AutofacServiceProvider(ApplicationContainer);
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.Configure(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //TODO: verify for production
+            AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+                // TODO: verify for production
+                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
-            else if (env.IsStaging())
+
+            // TODO: verify for production
+            // app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                app.UseCors(options => options.WithOrigins(Configuration["AllowedHosts"]).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            }
+                endpoints.MapControllers();
+            });
 
-            app.UseHttpsRedirection();
-
-            app.UseMiddleware<RequestLoggerMiddleware>();
             app.UseMiddleware<ExceptionHandlerMiddleware>();
-
-            app.UseMvc();
         }
     }
 }
