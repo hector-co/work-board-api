@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,7 @@ using Qurl.AspNetCore;
 using System.Text.Json;
 using WorkBoard.Api.Filters;
 using WorkBoard.Api.Middlewares;
+using WorkBoard.Commands.Exceptions;
 using WorkBoard.IocConfig;
 
 namespace WorkBoard.Api
@@ -32,8 +34,13 @@ namespace WorkBoard.Api
                 options.Filters.Add<ValidationActionFilter>();
                 options.Filters.Add<TransactionActionFilter>();
             })
-                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase)
-                .AddControllersAsServices();
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                })
+                .AddControllersAsServices()
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<CommandException>());
 
             services.AddQurlModelBinder();
 
@@ -59,6 +66,8 @@ namespace WorkBoard.Api
                 app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
 
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+
             // TODO: verify for production
             // app.UseHttpsRedirection();
 
@@ -71,7 +80,7 @@ namespace WorkBoard.Api
                 endpoints.MapControllers();
             });
 
-            app.UseMiddleware<ExceptionHandlerMiddleware>();
+            AutofacContainer.InitContext();
         }
     }
 }

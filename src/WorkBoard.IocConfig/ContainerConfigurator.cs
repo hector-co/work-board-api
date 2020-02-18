@@ -36,17 +36,9 @@ namespace WorkBoard.IocConfig
             builder.RegisterType<FakeEventStore>().AsImplementedInterfaces();
 
             //TODO: register Domain.Services
-
-            Configure(builder, configuration);
-
-            var container = builder.Build();
-            var dbContext = container.Resolve<WorkBoardContext>();
-            dbContext.Database.Migrate();
-
-            DbInitializer.AddSampleData(dbContext);
         }
 
-        public static void InitContext(IContainer container)
+        public static void InitContext(this ILifetimeScope container)
         {
             var dbContext = container.Resolve<WorkBoardContext>();
             dbContext.Database.Migrate();

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace WorkBoard.Commands.CardCommands
 {
