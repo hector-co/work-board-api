@@ -1,7 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Hco.Base.DataAccess.Ef;
-using Hco.Base.Domain;
 using MediatR;
 using WorkBoard.Commands.BoardColumnCommands;
 
@@ -11,9 +9,9 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
     {
         private readonly WorkBoardContext _context;
 
-        public EditColumnCommandHandler(IUnitOfWork unitOfWork)
+        public EditColumnCommandHandler(WorkBoardContext context)
         {
-            _context = ((UnitOfWorkEf<WorkBoardContext>)unitOfWork).CurrentContext;
+            _context = context;
         }
 
         public async Task<Unit> Handle(EditColumnCommand request, CancellationToken cancellationToken)
@@ -21,6 +19,9 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
             var columnDto = _context.Set<BoardColumnDtoDataAccess>().Find(request.ColumnId);
             columnDto.Title = request.Title;
             columnDto.Version++;
+
+            await _context.SaveChangesAsync();
+
             return await Unit.Task;
         }
     }

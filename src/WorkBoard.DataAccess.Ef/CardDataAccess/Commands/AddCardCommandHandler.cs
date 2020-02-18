@@ -1,6 +1,4 @@
-﻿using Hco.Base.DataAccess.Ef;
-using Hco.Base.Domain;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,9 +13,9 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
     {
         private readonly WorkBoardContext _context;
 
-        public AddCardCommandHandler(IUnitOfWork unitOfWork)
+        public AddCardCommandHandler(WorkBoardContext context)
         {
-            _context = ((UnitOfWorkEf<WorkBoardContext>)unitOfWork).CurrentContext;
+            _context = context;
         }
 
         public async Task<int> Handle(AddCardCommand request, CancellationToken cancellationToken)
@@ -47,7 +45,9 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
                 Guid = Guid.NewGuid()
             };
             _context.Set<CardDtoDataAccess>().Add(cardDto);
+
             await _context.SaveChangesAsync(cancellationToken);
+
             return cardDto.Id;
         }
     }

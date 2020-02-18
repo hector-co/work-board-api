@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Hco.Base.DataAccess.Ef;
-using Hco.Base.Domain;
 using MediatR;
 using WorkBoard.Commands.BoardColumnCommands;
 using WorkBoard.Commands.Exceptions;
@@ -14,9 +12,9 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
     {
         private readonly WorkBoardContext _context;
 
-        public DeleteColumnCommandHandler(IUnitOfWork unitOfWork)
+        public DeleteColumnCommandHandler(WorkBoardContext context)
         {
-            _context = ((UnitOfWorkEf<WorkBoardContext>)unitOfWork).CurrentContext;
+            _context = context;
         }
 
         public async Task<Unit> Handle(DeleteColumnCommand request, CancellationToken cancellationToken)
@@ -27,6 +25,9 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
             var columnDto = _context.Set<BoardColumnDtoDataAccess>().Find(request.ColumnId);
 
             _context.Set<BoardColumnDtoDataAccess>().Remove(columnDto);
+
+            await _context.SaveChangesAsync();
+
             return await Unit.Task;
         }
     }

@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Hco.Base.DataAccess.Ef;
-using Hco.Base.Domain;
 using MediatR;
 using WorkBoard.Commands.CardCommands;
 using WorkBoard.Dtos;
@@ -13,9 +11,9 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
     {
         private readonly WorkBoardContext _context;
 
-        public EditCardCommandHandler(IUnitOfWork unitOfWork)
+        public EditCardCommandHandler(WorkBoardContext context)
         {
-            _context = ((UnitOfWorkEf<WorkBoardContext>)unitOfWork).CurrentContext;
+            _context = context;
         }
 
         public async Task<Unit> Handle(EditCardCommand request, CancellationToken cancellationToken)
@@ -28,6 +26,7 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
             cardDto.Priority = (CardPriority)request.Priority;
 
             await _context.SaveChangesAsync(cancellationToken);
+
             return await Unit.Task;
         }
     }

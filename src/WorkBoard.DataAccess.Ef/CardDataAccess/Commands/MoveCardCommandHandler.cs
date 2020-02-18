@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Hco.Base.DataAccess.Ef;
-using Hco.Base.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using WorkBoard.Commands.CardCommands;
@@ -14,9 +12,9 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
     {
         private readonly WorkBoardContext _context;
 
-        public MoveCardCommandHandler(IUnitOfWork unitOfWork)
+        public MoveCardCommandHandler(WorkBoardContext context)
         {
-            _context = ((UnitOfWorkEf<WorkBoardContext>)unitOfWork).CurrentContext;
+            _context = context;
         }
 
         public async Task<Unit> Handle(MoveCardCommand request, CancellationToken cancellationToken)
