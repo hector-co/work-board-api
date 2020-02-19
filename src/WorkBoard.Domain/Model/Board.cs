@@ -1,19 +1,44 @@
-using System;
-using System.Collections.Generic;
 using Hco.Base.Domain;
+using Hco.Base.Domain.Exceptions;
 
 namespace WorkBoard.Domain.Model
 {
     public class Board : AggregateRoot<int>
     {
         private string _title;
-        private List<int> _usersId;
         private string _description;
-        private int _state;
+        private IBoardState _state;
 
-		protected Board()
-		{
-			_usersId = new List<int>();
-		}
+        protected Board()
+        {
+            _state = new OpenState(this);
+        }
+
+        public Board(string title, string description)
+        {
+            _title = title;
+            _description = description;
+            _state = new OpenState(this);
+        }
+
+        public void Close()
+        {
+            _state.Close();
+        }
+
+        public void ReOpen()
+        {
+            _state.Open();
+        }
+
+        public bool IsOpen()
+        {
+            return _state.IsOpen();
+        }
+
+        internal void SetState(IBoardState state)
+        {
+            _state = state;
+        }
     }
 }

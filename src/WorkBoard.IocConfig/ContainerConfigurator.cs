@@ -9,6 +9,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using WorkBoard.Commands.Exceptions;
 using WorkBoard.DataAccess.Ef;
 
 namespace WorkBoard.IocConfig
@@ -26,6 +27,7 @@ namespace WorkBoard.IocConfig
 
             builder.RegisterType<UnitOfWorkEf<WorkBoardContext>>().AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.RegisterTypes(typeof(WorkBoardContext).GetTypeInfo().Assembly.GetTypes()).AsImplementedInterfaces();
+            builder.RegisterTypes(typeof(CommandException).GetTypeInfo().Assembly.GetTypes()).AsImplementedInterfaces();
 
             Log.Logger = new LoggerConfiguration()
                .ReadFrom.Configuration(configuration)
