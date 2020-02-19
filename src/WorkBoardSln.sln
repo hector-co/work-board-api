@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkBoard.Domain.Tests", "W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6FB0F8D4-A45C-4130-9C82-F5E176B152B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkBoard.DataAccess.Dapper", "WorkBoard.DataAccess.Dapper\WorkBoard.DataAccess.Dapper.csproj", "{C93AB186-E423-43B5-A809-750A22F7A686}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{976D5DBF-0A9F-45EB-A5E5-EA75F4EFCB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{976D5DBF-0A9F-45EB-A5E5-EA75F4EFCB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{976D5DBF-0A9F-45EB-A5E5-EA75F4EFCB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C93AB186-E423-43B5-A809-750A22F7A686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C93AB186-E423-43B5-A809-750A22F7A686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C93AB186-E423-43B5-A809-750A22F7A686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C93AB186-E423-43B5-A809-750A22F7A686}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

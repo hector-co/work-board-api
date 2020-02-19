@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WorkBoard.Commands\WorkBoard.Commands.csproj" />
+    <ProjectReference Include="..\WorkBoard.DataAccess.Dapper\WorkBoard.DataAccess.Dapper.csproj" />
     <ProjectReference Include="..\WorkBoard.DataAccess.Ef\WorkBoard.DataAccess.Ef.csproj" />
     <ProjectReference Include="..\WorkBoard.Domain\WorkBoard.Domain.csproj" />
     <ProjectReference Include="..\WorkBoard.Queries\WorkBoard.Queries.csproj" />
