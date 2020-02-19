@@ -5,9 +5,9 @@ using WorkBoard.Queries.Users;
 using WorkBoard.Dtos;
 using WorkBoard.Queries;
 using Microsoft.Extensions.Configuration;
-using System.Data.SqlClient;
 using Dapper;
 using System.Linq;
+using Microsoft.Data.SqlClient;
 
 namespace WorkBoard.DataAccess.Dapper.UserDataAccess.Queries
 {
