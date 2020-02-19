@@ -22,10 +22,10 @@ namespace WorkBoard.DataAccess.Dapper.UserDataAccess.Queries
         {
             using var connection = new SqlConnection(_connectionString);
             var query = "select * from [user] where id = @Id";
-            
+
             var result = new ResultModel<UserDto>
             {
-                Data = await connection.QueryFirstAsync<UserDto>(query, new { request.Id })
+                Data = await connection.QueryFirstOrDefaultAsync<UserDto>(query, new { request.Id })
             };
 
             return result;
