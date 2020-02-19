@@ -29,9 +29,7 @@ namespace WorkBoard.DataAccess.Ef.UserDataAccess.Queries
                 Data = (await efQuery
 						.AsNoTracking()
                         .FirstOrDefaultAsync(m => request.Id == m.Id, cancellationToken))
-                        .Adapt<UserDto>()
             };
-			if (result.Data == null) return result;
 			return result;
         }
 

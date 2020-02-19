@@ -32,8 +32,7 @@ namespace WorkBoard.DataAccess.Ef.UserDataAccess.Queries
             efQuery = efQuery.ApplySortAndPaging(request);
 
             result.Data = (await efQuery
-                .ToListAsync(cancellationToken))
-                .Adapt<List<UserDto>>();
+                .ToListAsync(cancellationToken));
 
             return result;
         }

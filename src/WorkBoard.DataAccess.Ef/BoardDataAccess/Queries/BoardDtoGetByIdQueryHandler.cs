@@ -32,7 +32,6 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Queries
                         .FirstOrDefaultAsync(m => request.Id == m.Id, cancellationToken))
                         .Adapt<BoardDto>()
             };
-			if (result.Data == null) return result;
 			return result;
         }
 

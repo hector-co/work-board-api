@@ -32,7 +32,6 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Queries
                         .FirstOrDefaultAsync(m => request.Id == m.Id, cancellationToken))
                         .Adapt<CardDto>()
             };
-			if (result.Data == null) return result;
 			return result;
         }
 
