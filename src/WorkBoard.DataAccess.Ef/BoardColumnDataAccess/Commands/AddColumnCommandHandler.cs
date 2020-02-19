@@ -3,7 +3,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkBoard.Commands.BoardColumnCommands;
+using WorkBoard.Commands.Exceptions;
 using WorkBoard.DataAccess.Ef.BoardDataAccess;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
 {
@@ -18,6 +20,9 @@ namespace WorkBoard.DataAccess.Ef.BoardColumnDataAccess.Commands
 
         public async Task<int> Handle(AddColumnCommand request, CancellationToken cancellationToken)
         {
+            var boardDto = await _context.Set<BoardDtoDataAccess>().FindAsync(request.BoardId);
+            if (boardDto == null || boardDto.State == BoardState.Closed) throw new CommandException();
+
             var maxOrder = 0;
             if (_context.Set<BoardColumnDtoDataAccess>().Count(c => c.BoardDataAccess.Id == request.BoardId) > 0)
             {

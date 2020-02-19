@@ -6,6 +6,7 @@ using WorkBoard.Commands.CardCommands;
 using WorkBoard.Dtos;
 using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
 using WorkBoard.DataAccess.Ef.BoardDataAccess;
+using WorkBoard.Commands.Exceptions;
 
 namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
 {
@@ -20,6 +21,9 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
 
         public async Task<int> Handle(AddCardCommand request, CancellationToken cancellationToken)
         {
+            var boardDto = await _context.Set<BoardDtoDataAccess>().FindAsync(request.BoardId);
+            if (boardDto == null || boardDto.State == BoardState.Closed) throw new CommandException();
+
             var columnDto = request.ColumnId.HasValue
                 ? _context.Set<BoardColumnDtoDataAccess>().First(c => c.Id == request.ColumnId.Value)
                 : _context.Set<BoardColumnDtoDataAccess>().Where(c => c.BoardDataAccess.Id == request.BoardId)

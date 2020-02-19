@@ -98,5 +98,26 @@ namespace WorkBoard.Api.Controllers
             return Ok();
         }
 
+        [HttpPost("{id}/close")]
+        public async Task<IActionResult> Close(int id, CancellationToken cancellationToken)
+        {
+            var command = new CloseBoardCommand
+            {
+                BoardId = id
+            };
+            await _mediator.Send(command, cancellationToken);
+            return Accepted();
+        }
+
+        [HttpPost("{id}/re-open")]
+        public async Task<IActionResult> ReOpen(int id, CancellationToken cancellationToken)
+        {
+            var command = new ReOpenBoardCommand
+            {
+                BoardId = id
+            };
+            await _mediator.Send(command, cancellationToken);
+            return Accepted();
+        }
     }
 }

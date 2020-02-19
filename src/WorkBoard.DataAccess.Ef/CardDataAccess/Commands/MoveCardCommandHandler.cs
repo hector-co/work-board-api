@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using WorkBoard.Commands.CardCommands;
+using WorkBoard.Commands.Exceptions;
 using WorkBoard.DataAccess.Ef.BoardColumnDataAccess;
+using WorkBoard.Dtos;
 
 namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
 {
@@ -19,7 +21,10 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Commands
 
         public async Task<Unit> Handle(MoveCardCommand request, CancellationToken cancellationToken)
         {
-            var cardDto = _context.Set<CardDtoDataAccess>().Include(c => c.ColumnDataAccess).FirstOrDefault(c => c.Id == request.CardId);
+            var cardDto = _context.Set<CardDtoDataAccess>().Include(c => c.BoardDataAccess).Include(c => c.ColumnDataAccess).FirstOrDefault(c => c.Id == request.CardId);
+
+            if (cardDto == null) throw new CommandException();
+            if (cardDto.BoardDataAccess == null || cardDto.BoardDataAccess.State == BoardState.Closed) throw new CommandException();
 
             if (cardDto.ColumnDataAccess.Id == request.ColumnId && cardDto.Order == request.Order)
                 return await Unit.Task;
