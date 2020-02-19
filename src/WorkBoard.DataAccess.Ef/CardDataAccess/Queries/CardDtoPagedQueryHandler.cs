@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapster;
-using MediatR;
 using WorkBoard.Queries.Cards;
 using WorkBoard.Dtos;
 using WorkBoard.Queries;
@@ -14,12 +13,10 @@ namespace WorkBoard.DataAccess.Ef.CardDataAccess.Queries
     public class CardDtoPagedQueryHandler : ICardDtoPagedQueryHandler
     {
         private readonly WorkBoardContext _context;
-		private readonly IMediator _mediator;
 
-        public CardDtoPagedQueryHandler(WorkBoardContext context, IMediator mediator)
+        public CardDtoPagedQueryHandler(WorkBoardContext context)
         {
 			_context = context;
-			_mediator = mediator;
         }
 
         public async Task<ResultModel<IEnumerable<CardDto>>> Handle(CardDtoPagedQuery request, CancellationToken cancellationToken)

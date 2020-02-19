@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapster;
-using MediatR;
 using WorkBoard.Dtos;
 using WorkBoard.Queries.Boards;
 using WorkBoard.Queries;
@@ -13,12 +12,10 @@ namespace WorkBoard.DataAccess.Ef.BoardDataAccess.Queries
     public class BoardDtoGetByIdQueryHandler : IBoardDtoGetByIdQueryHandler
     {
         private readonly WorkBoardContext _context;
-		private readonly IMediator _mediator;
 
-        public BoardDtoGetByIdQueryHandler(WorkBoardContext context, IMediator mediator)
+        public BoardDtoGetByIdQueryHandler(WorkBoardContext context)
         {
 			_context = context;
-			_mediator = mediator;
         }
 
 		public async Task<ResultModel<BoardDto>> Handle(BoardDtoGetByIdQuery request, CancellationToken cancellationToken)
