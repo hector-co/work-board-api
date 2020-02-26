@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.0" />
-    <PackageReference Include="Qurl" Version="0.5.4" />
+    <PackageReference Include="Qurl" Version="0.6.2" />
   </ItemGroup>
 
   <ItemGroup>

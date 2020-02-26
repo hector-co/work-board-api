@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Dapper;
 using System.Linq;
 using Microsoft.Data.SqlClient;
+using Qurl.Dapper;
 
 namespace WorkBoard.DataAccess.Dapper.UserDataAccess.Queries
 {
@@ -24,11 +25,10 @@ namespace WorkBoard.DataAccess.Dapper.UserDataAccess.Queries
         {
             using var connection = new SqlConnection(_connectionString);
 
-            var queryParts = request.GetQueryParts();
-            var parameters = new DynamicParameters(queryParts.parameters);
-            var queryFilters = string.IsNullOrEmpty(queryParts.queryFilters) ? "1 = 1" : queryParts.queryFilters;
-            var query = $"select * from [user] t0 where {queryFilters} {queryParts.sortAndPaging};";
-            query += $"select count(*) from [user] t0 where {queryFilters};";
+            var queryParts = request.GetQueryParts("User");
+            var parameters = new DynamicParameters(queryParts.Parameters);
+            var query = queryParts.GetSqlQuery();
+            query += queryParts.GetSqlCountQuery(false);
 
             var resultSets = await connection.QueryMultipleAsync(query, parameters);
             var userDtos = (await resultSets.ReadAsync<UserDto>()).ToList();
